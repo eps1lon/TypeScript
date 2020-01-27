@@ -3612,6 +3612,10 @@ declare var ChannelSplitterNode: {
 interface CharacterData extends Node, ChildNode, NonDocumentTypeChildNode {
     data: string;
     readonly length: number;
+    /**
+     * Returns the top-level document object of the character data.
+     */
+    readonly ownerDocument: Document;
     appendData(data: string): void;
     deleteData(offset: number, count: number): void;
     insertData(offset: number, data: string): void;
@@ -4720,6 +4724,10 @@ interface Document extends Node, DocumentAndElementEventHandlers, DocumentOrShad
      */
     readonly origin: string;
     /**
+     * A document is not owned by another document.
+     */
+    readonly ownerDocument: null;
+    /**
      * Return an HTMLCollection of the embed elements in the Document.
      */
     readonly plugins: HTMLCollectionOf<HTMLEmbedElement>;
@@ -5142,6 +5150,10 @@ interface DocumentEvent {
 
 /** A minimal document object that has no parent. It is used as a lightweight version of Document that stores a segment of a document structure comprised of nodes just like a standard document. The key difference is that because the document fragment isn't part of the active document tree structure, changes made to the fragment don't affect the document, cause reflow, or incur any performance impact that can occur when changes are made. */
 interface DocumentFragment extends Node, NonElementParentNode, ParentNode {
+    /**
+     * Returns the top-level document object of the document fragment.
+     */
+    readonly ownerDocument: Document;
     getElementById(elementId: string): HTMLElement | null;
 }
 
@@ -5180,6 +5192,10 @@ declare var DocumentTimeline: {
 /** A Node containing a doctype. */
 interface DocumentType extends Node, ChildNode {
     readonly name: string;
+    /**
+     * Returns the top-level document object of the doctype.
+     */
+    readonly ownerDocument: Document;
     readonly publicId: string;
     readonly systemId: string;
 }
@@ -5278,6 +5294,10 @@ interface Element extends Node, Animatable, ChildNode, InnerHTML, NonDocumentTyp
     onfullscreenchange: ((this: Element, ev: Event) => any) | null;
     onfullscreenerror: ((this: Element, ev: Event) => any) | null;
     outerHTML: string;
+    /**
+     * Returns the top-level document object of the element.
+     */
+    readonly ownerDocument: Document;
     /**
      * Returns the namespace prefix.
      */
@@ -12046,6 +12066,10 @@ interface PositionError {
 
 /** A processing instruction embeds application-specific instructions in XML which can be ignored by other applications that don't recognize them. */
 interface ProcessingInstruction extends CharacterData {
+    /**
+     * Returns the top-level document object of the processing instruction.
+     */
+    readonly ownerDocument: Document;
     readonly target: string;
 }
 
